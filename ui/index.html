@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morning First Mate 🏴‍☠️ Your AI Productivity Navigator</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #060b13;
+            --card-bg: rgba(13, 24, 41, 0.65);
+            --gold: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.35);
+            --teal: #14b8a6;
+            --teal-glow: rgba(20, 184, 166, 0.35);
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border-gold: rgba(212, 175, 55, 0.15);
+            --border-teal: rgba(20, 184, 166, 0.15);
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(20, 184, 166, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(212, 175, 55, 0.06) 0px, transparent 50%),
+                radial-gradient(at 50% 0%, rgba(13, 24, 41, 0.9) 0px, transparent 60%);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER SECTION --- */
+        header {
+            position: relative;
+            background: linear-gradient(180deg, rgba(8, 17, 32, 0.95) 0%, rgba(6, 11, 19, 0.8) 100%);
+            border-bottom: 1px solid var(--border-gold);
+            padding: 3rem 1.5rem 6rem 1.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .header-logo {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 0 15px var(--gold-glow));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fce085 0%, var(--gold) 50%, #b8860b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
+        }
+
+        .subtitle {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--teal);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(20, 184, 166, 0.4);
+        }
+
+        /* Auto-updating Clock */
+        .clock-container {
+            background: rgba(6, 11, 19, 0.6);
+            border: 1px solid var(--border-teal);
+            border-radius: 30px;
+            padding: 0.5rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: inset 0 0 15px rgba(20, 184, 166, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .clock-time {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--teal);
+            min-width: 90px;
+        }
+
+        .clock-divider {
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .clock-date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* SVG Animating Waves */
+        .wave-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+
+        .waves {
+            position: relative;
+            width: 100%;
+            height: 40px;
+            margin-bottom: -7px; /* Fix for safari gap */
+            min-height: 40px;
+            max-height: 40px;
+        }
+
+        .parallax > use {
+            animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+        }
+        .parallax > use:nth-child(1) {
+            animation-delay: -2s;
+            animation-duration: 7s;
+        }
+        .parallax > use:nth-child(2) {
+            animation-delay: -3s;
+            animation-duration: 10s;
+        }
+        .parallax > use:nth-child(3) {
+            animation-delay: -4s;
+            animation-duration: 13s;
+        }
+        .parallax > use:nth-child(4) {
+            animation-delay: -5s;
+            animation-duration: 20s;
+        }
+
+        @keyframes move-forever {
+            0% {
+                transform: translate3d(-90px,0,0);
+            }
+            100% { 
+                transform: translate3d(85px,0,0);
+            }
+        }
+
+        /* --- MAIN CONTENT & ACTION BUTTON --- */
+        main {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .action-container {
+            margin-bottom: 3.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-briefing {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #060b13;
+            background: linear-gradient(135deg, #ffe596 0%, var(--gold) 50%, #b8860b 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 1.2rem 3rem;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.4),
+                0 0 20px var(--gold-glow);
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-briefing::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(
+                to right, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.3) 50%, 
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-25deg);
+            transition: 0.75s;
+            opacity: 0;
+        }
+
+        .btn-briefing:hover::after {
+            opacity: 1;
+            left: 125%;
+        }
+
+        .btn-briefing:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.5),
+                0 0 35px var(--gold);
+        }
+
+        .btn-briefing:active {
+            transform: scale(0.98) translateY(1px);
+        }
+
+        /* --- LOADING ANIMATION --- */
+        .loader-wrapper {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin: 3rem 0;
+            gap: 1.5rem;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        .spinning-anchor {
+            font-size: 4rem;
+            color: var(--gold);
+            animation: spin 3s linear infinite, glow 1.5s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 10px var(--gold-glow));
+        }
+
+        .loading-text {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--teal);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        /* --- BRIEFING DISPLAY CARDS --- */
+        .briefing-container {
+            display: none;
+            width: 100%;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Greeting card stretches full width */
+        .card-greeting {
+            grid-column: span 2;
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.15) 0%, rgba(13, 24, 41, 0.8) 100%);
+            border: 1px solid var(--border-teal);
+            box-shadow: 0 8px 32px rgba(20, 184, 166, 0.05);
+            text-align: center;
+            padding: 2.5rem;
+        }
+
+        .card-greeting .card-title {
+            color: var(--teal);
+            font-size: 1.8rem;
+            justify-content: center;
+        }
+
+        .card-greeting p {
+            font-size: 1.15rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #f1f5f9;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-gold);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* Card custom styling/accents */
+        .card-schedule {
+            border-left: 5px solid var(--gold);
+        }
+        .card-github {
+            border-left: 5px solid #6366f1; /* purple-blue */
+        }
+        .card-notion {
+            border-left: 5px solid var(--teal);
+        }
+        .card-mission {
+            border-left: 5px solid #f43f5e; /* red-rose */
+            grid-column: span 2;
+            background: linear-gradient(180deg, var(--card-bg) 0%, rgba(244, 63, 94, 0.04) 100%);
+        }
+
+        .card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 0.8rem;
+        }
+
+        .card-title i {
+            font-size: 1.4rem;
+        }
+
+        .card-schedule .card-title i { color: var(--gold); }
+        .card-github .card-title i { color: #6366f1; }
+        .card-notion .card-title i { color: var(--teal); }
+        .card-mission .card-title i { color: #f43f5e; }
+
+        .card-content {
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .card-content p {
+            margin-bottom: 0.8rem;
+        }
+
+        .card-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Markdown specific lists */
+        .ocean-list {
+            list-style: none;
+            padding-left: 0.5rem;
+        }
+
+        .ocean-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .ocean-list li::before {
+            content: '⚓';
+            position: absolute;
+            left: 0;
+            top: 1px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .card-mission .ocean-list li::before {
+            content: '⚔️';
+        }
+
+        .card-github .ocean-list li::before {
+            content: '💻';
+        }
+
+        .card-notion .ocean-list li::before {
+            content: '📝';
+        }
+
+        /* --- CHAT SECTION --- */
+        .chat-section {
+            width: 100%;
+            max-width: 900px;
+            background-color: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            border-radius: 24px;
+            box-shadow: 
+                0 15px 40px rgba(0,0,0,0.4),
+                inset 0 0 15px rgba(20, 184, 166, 0.05);
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .chat-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .chat-header {
+            background: linear-gradient(90deg, rgba(8, 17, 32, 0.8) 0%, rgba(13, 24, 41, 0.8) 100%);
+            border-bottom: 1px solid rgba(20, 184, 166, 0.2);
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .chat-header i {
+            color: var(--teal);
+            font-size: 1.3rem;
+            animation: pulse-glow 2s infinite alternate;
+        }
+
+        .chat-header h3 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            background: rgba(6, 11, 19, 0.3);
+            scroll-behavior: smooth;
+        }
+
+        /* Chat bubbles */
+        .message-bubble {
+            max-width: 75%;
+            padding: 1rem 1.2rem;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            animation: messageIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards;
+            position: relative;
+        }
+
+        .message-bubble.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(184, 134, 11, 0.15) 100%);
+            border: 1px solid var(--border-gold);
+            border-bottom-right-radius: 4px;
+            color: #ffe89e;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.05);
+        }
+
+        .message-bubble.ai {
+            align-self: flex-start;
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.2) 0%, rgba(13, 24, 41, 0.8) 100%);
+            border: 1px solid var(--border-teal);
+            border-bottom-left-radius: 4px;
+            color: #cffafe;
+            box-shadow: 0 4px 15px rgba(20, 184, 166, 0.05);
+        }
+
+        .message-bubble p {
+            margin-bottom: 0.5rem;
+        }
+        .message-bubble p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Chat input container */
+        .chat-input-container {
+            padding: 1.2rem 1.5rem;
+            background: rgba(8, 17, 32, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex-grow: 1;
+            background: rgba(6, 11, 19, 0.6);
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            border-radius: 30px;
+            padding: 0.9rem 1.5rem;
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 15px rgba(20, 184, 166, 0.15);
+            background: rgba(6, 11, 19, 0.9);
+        }
+
+        .btn-send {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.8) 0%, rgba(13, 148, 136, 0.9) 100%);
+            color: #060b13;
+            border: none;
+            border-radius: 50%;
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(20, 184, 166, 0.3);
+        }
+
+        .btn-send:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 15px rgba(20, 184, 166, 0.5);
+            background: var(--teal);
+        }
+
+        .btn-send:active {
+            transform: scale(0.95);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: rgba(8, 17, 32, 0.95);
+            border-top: 1px solid var(--border-gold);
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            z-index: 10;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-text i {
+            color: #f43f5e;
+            animation: pulse 1.2s infinite ease-in-out;
+        }
+
+        .footer-tech {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .footer-links a {
+            color: var(--teal);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        /* --- CUSTOM SCROLLBAR --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(20, 184, 166, 0.25);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(20, 184, 166, 0.55);
+        }
+
+        /* --- ANIMATIONS KEYFRAMES --- */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.4)); }
+            to { filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8)); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes pulse-glow {
+            from { text-shadow: 0 0 5px rgba(20, 184, 166, 0.3); }
+            to { text-shadow: 0 0 15px rgba(20, 184, 166, 0.8); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes messageIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* --- RESPONSIVE STYLES --- */
+        @media (max-width: 900px) {
+            .briefing-container {
+                grid-template-columns: 1fr;
+            }
+            .card-greeting, .card-mission {
+                grid-column: span 1;
+            }
+            h1 {
+                font-size: 2.3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 2rem 1rem 5rem 1rem;
+            }
+            .header-logo {
+                font-size: 3rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .subtitle {
+                font-size: 0.85rem;
+                letter-spacing: 2px;
+            }
+            .clock-container {
+                flex-direction: column;
+                gap: 0.2rem;
+                border-radius: 15px;
+                padding: 0.6rem 1.2rem;
+            }
+            .btn-briefing {
+                font-size: 1.1rem;
+                padding: 1rem 2rem;
+            }
+            .message-bubble {
+                max-width: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- --- HEADER SECTION --- -->
+    <header>
+        <div class="header-logo">⚓</div>
+        <h1>Morning First Mate</h1>
+        <div class="subtitle">Your personal AI productivity navigator</div>
+        
+        <div class="clock-container">
+            <span class="clock-time" id="clock-time">00:00:00 AM</span>
+            <span class="clock-divider">|</span>
+            <span class="clock-date" id="clock-date">Thursday, May 28</span>
+        </div>
+
+        <!-- SVG Waves -->
+        <div class="wave-container">
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z" />
+                </defs>
+                <g class="parallax">
+                    <use href="#gentle-wave" x="48" y="0" fill="rgba(20, 184, 166, 0.07)" />
+                    <use href="#gentle-wave" x="48" y="3" fill="rgba(212, 175, 55, 0.05)" />
+                    <use href="#gentle-wave" x="48" y="5" fill="rgba(6, 11, 19, 0.3)" />
+                    <use href="#gentle-wave" x="48" y="7" fill="#060b13" />
+                </g>
+            </svg>
+        </div>
+    </header>
+
+    <!-- --- MAIN AREA --- -->
+    <main>
+        <!-- Get Briefing Button -->
+        <div class="action-container">
+            <button class="btn-briefing" id="btn-get-briefing">
+                <i class="fa-solid fa-ship"></i> Chart My Briefing
+            </button>
+        </div>
+
+        <!-- Spinning Anchor Loader -->
+        <div class="loader-wrapper" id="loader">
+            <div class="spinning-anchor">⚓</div>
+            <div class="loading-text">Summoning Coral SQL & Gemini AI...</div>
+        </div>
+
+        <!-- Briefing Cards Container -->
+        <div class="briefing-container" id="briefing-container">
+            <!-- Greeting Card -->
+            <div class="card card-greeting" id="card-greeting">
+                <div class="card-title">
+                    <i class="fa-solid fa-compass-drafting"></i> Good Morning, Captain!
+                </div>
+                <div class="card-content" id="content-greeting">
+                    Loading greeting...
+                </div>
+            </div>
+
+            <!-- Schedule Card -->
+            <div class="card card-schedule" id="card-schedule">
+                <div class="card-title">
+                    <i class="fa-solid fa-calendar-day"></i> Today's Schedule
+                </div>
+                <div class="card-content" id="content-schedule">
+                    Loading schedule...
+                </div>
+            </div>
+
+            <!-- GitHub Card -->
+            <div class="card card-github" id="card-github">
+                <div class="card-title">
+                    <i class="fa-brands fa-github-alt"></i> GitHub Fleet Activity
+                </div>
+                <div class="card-content" id="content-github">
+                    Loading GitHub data...
+                </div>
+            </div>
+
+            <!-- Notion Card -->
+            <div class="card card-notion" id="card-notion">
+                <div class="card-title">
+                    <i class="fa-solid fa-scroll"></i> Notion Logbook
+                </div>
+                <div class="card-content" id="content-notion">
+                    Loading Notion notes...
+                </div>
+            </div>
+
+            <!-- Mission Card -->
+            <div class="card card-mission" id="card-mission">
+                <div class="card-title">
+                    <i class="fa-solid fa-swords"></i> Your Mission Today (AI Priorities)
+                </div>
+                <div class="card-content" id="content-mission">
+                    Loading priorities...
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="chat-section" id="chat-section">
+            <div class="chat-header">
+                <i class="fa-solid fa-comments"></i>
+                <h3>Converse with First Mate</h3>
+            </div>
+            
+            <div class="chat-messages" id="chat-messages">
+                <div class="message-bubble ai">
+                    Ahoy Captain! I am your Morning First Mate. Chart our briefing first, or ask me any question about your calendar, tasks, or GitHub repositories!
+                </div>
+            </div>
+
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" id="chat-input" placeholder="Ask your First Mate anything..." autocomplete="off">
+                <button class="btn-send" id="btn-send">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- --- FOOTER --- -->
+    <footer>
+        <div class="footer-tech">Powered by Coral SQL + Gemini AI</div>
+        <div class="footer-text">
+            Made with <i class="fa-solid fa-heart"></i> for the Pirates of the Coral-bean Hackathon
+        </div>
+        <div class="footer-links">
+            <a href="https://github.com/withcoral/coral" target="_blank">
+                <i class="fa-brands fa-github"></i> Discover Coral SQL
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // --- REAL TIME CLOCK ---
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const dateStr = now.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' });
+            
+            document.getElementById('clock-time').textContent = timeStr;
+            document.getElementById('clock-date').textContent = dateStr;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // --- CUSTOM MARKDOWN PARSER ---
+        function parseMarkdown(text) {
+            if (!text) return "<p>No data found on the horizon.</p>";
+            return text
+                .replace(/#{1,6}\s/g, '')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/`(.*?)`/g, '<code>$1</code>')
+                .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+                .replace(/(<li>.*<\/li>)/gs, '<ul class="ocean-list">$1</ul>')
+                .replace(/^\d+\.\s+(.+)$/gm, '<li>$1</li>')
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n/g, '<br>');
+        }
+
+        // --- PARSE BRIEFING RESPONSE INTO CARDS ---
+        function parseBriefing(text) {
+            const sections = {
+                greeting: "",
+                schedule: "",
+                github: "",
+                notion: "",
+                mission: ""
+            };
+            
+            // Split response using the requested markdown headings
+            const regex = /(Good Morning, Captain!|Today's Schedule|GitHub Activity|Notion Tasks|Your Mission Today)/i;
+            const parts = text.split(regex);
+            
+            let currentKey = null;
+            for (let i = 0; i < parts.length; i++) {
+                const part = parts[i].trim();
+                if (!part) continue;
+                
+                const lower = part.toLowerCase();
+                if (lower.includes("good morning")) {
+                    currentKey = "greeting";
+                } else if (lower.includes("schedule")) {
+                    currentKey = "schedule";
+                } else if (lower.includes("github")) {
+                    currentKey = "github";
+                } else if (lower.includes("notion")) {
+                    currentKey = "notion";
+                } else if (lower.includes("mission")) {
+                    currentKey = "mission";
+                } else if (currentKey) {
+                    sections[currentKey] = part;
+                } else {
+                    // Fallback intro
+                    sections.greeting = part;
+                }
+            }
+            
+            return sections;
+        }
+
+        // --- BUTTON AND DATA FETCHING LOGIC ---
+        const btnGetBriefing = document.getElementById('btn-get-briefing');
+        const loader = document.getElementById('loader');
+        const briefingContainer = document.getElementById('briefing-container');
+        const chatSection = document.getElementById('chat-section');
+
+        btnGetBriefing.addEventListener('click', async () => {
+            // Reset UI states
+            loader.style.display = 'flex';
+            briefingContainer.style.display = 'none';
+            btnGetBriefing.disabled = true;
+            btnGetBriefing.style.opacity = '0.7';
+
+            try {
+                // Call local Flask API
+                const response = await fetch('http://localhost:5000/briefing');
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    const text = data.briefing;
+                    const sections = parseBriefing(text);
+
+                    // Insert content to cards
+                    document.getElementById('content-greeting').innerHTML = parseMarkdown(sections.greeting);
+                    document.getElementById('content-schedule').innerHTML = parseMarkdown(sections.schedule);
+                    document.getElementById('content-github').innerHTML = parseMarkdown(sections.github);
+                    document.getElementById('content-notion').innerHTML = parseMarkdown(sections.notion);
+                    document.getElementById('content-mission').innerHTML = parseMarkdown(sections.mission);
+
+                    // Show cards with fade-in animation
+                    loader.style.display = 'none';
+                    briefingContainer.style.display = 'grid';
+                    chatSection.classList.add('show');
+
+                    // Trigger CSS animation delay-by-delay
+                    const cards = document.querySelectorAll('.card');
+                    cards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.classList.add('animate');
+                        }, index * 150);
+                    });
+                } else {
+                    alert('Error from First Mate: ' + data.message);
+                    loader.style.display = 'none';
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Failed to connect to First Mate backend. Is the server running on port 5000?');
+                loader.style.display = 'none';
+            } finally {
+                btnGetBriefing.disabled = false;
+                btnGetBriefing.style.opacity = '1';
+            }
+        });
+
+        // --- CHAT INTERACTION LOGIC ---
+        const btnSend = document.getElementById('btn-send');
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+
+        async function sendUserMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // Clear input box
+            chatInput.value = '';
+
+            // Add user message bubble
+            const userBubble = document.createElement('div');
+            userBubble.className = 'message-bubble user';
+            userBubble.textContent = message;
+            chatMessages.appendChild(userBubble);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Add AI thinking bubble
+            const thinkingBubble = document.createElement('div');
+            thinkingBubble.className = 'message-bubble ai';
+            thinkingBubble.textContent = 'Plotting course...';
+            chatMessages.appendChild(thinkingBubble);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            try {
+                // Call chat Flask endpoint
+                const response = await fetch('http://localhost:5000/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: message })
+                });
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    // Update thinking bubble with real AI response
+                    thinkingBubble.innerHTML = parseMarkdown(data.response);
+                } else {
+                    thinkingBubble.textContent = 'Alas, Captain! An error occurred: ' + data.message;
+                }
+            } catch (err) {
+                console.error(err);
+                thinkingBubble.textContent = 'Failed to fetch response. Check if server is running.';
+            } finally {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+
+        btnSend.addEventListener('click', sendUserMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendUserMessage();
+            }
+        });
+    </script>
+</body>
+</html>
