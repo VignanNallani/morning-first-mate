@@ -64,7 +64,7 @@ def get_morning_briefing():
     data_context = f"""
 {SYSTEM_PROMPT}
 
-Here is the user's real live data fetched from their tools via Coral SQL:
+Here is the user's real live data:
 
 GITHUB REPOSITORIES:
 {github_repos}
@@ -78,8 +78,13 @@ TODAY'S GOOGLE CALENDAR EVENTS:
 NOTION PAGES:
 {notion_pages}
 
-Now generate a personalized morning briefing for Captain VignanNallani.
-Make it motivating, actionable, and fun with pirate theme.
+IMPORTANT: You MUST generate ALL 5 sections in your response.
+Even if some data is empty, generate content for every section.
+For "Your Mission Today" - always give exactly 3 priorities based 
+on the GitHub data even if calendar and notion are empty.
+Format each section clearly starting with the section name.
+Never say "No data found" for Your Mission Today - always 
+generate priorities from whatever data is available.
 """
     
     response = client_ai.models.generate_content(

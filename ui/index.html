@@ -909,6 +909,19 @@
                 }
             }
             
+            // Fallback for mission: if empty or contains "No data found on the horizon"
+            if (!sections.mission || sections.mission.trim() === "" || sections.mission.trim() === "No data found on the horizon") {
+                const paragraphs = text.trim().split(/\n\s*\n+/);
+                if (paragraphs.length > 0) {
+                    let fallbackMission = paragraphs[paragraphs.length - 1].trim();
+                    // Combine with preceding paragraph if last paragraph is a short signoff
+                    if ((fallbackMission.toLowerCase().includes("winds") || fallbackMission.toLowerCase().includes("seas") || fallbackMission.length < 55) && paragraphs.length > 1) {
+                        fallbackMission = paragraphs[paragraphs.length - 2].trim() + "\n\n" + fallbackMission;
+                    }
+                    sections.mission = fallbackMission;
+                }
+            }
+            
             return sections;
         }
 
