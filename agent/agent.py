@@ -1,11 +1,11 @@
-from google import genai
+from mistralai.client import Mistral
 import subprocess
 import os
 from dotenv import load_dotenv
 
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'))
 
-client_ai = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+client_ai = Mistral(api_key=os.getenv("MISTRAL_API_KEY"))
 
 SYSTEM_PROMPT = """You are Morning First Mate, a personal AI productivity 
 assistant with a fun pirate personality. Your job is to help the user 
@@ -87,19 +87,19 @@ Never say "No data found" for Your Mission Today - always
 generate priorities from whatever data is available.
 """
     
-    response = client_ai.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=data_context
+    response = client_ai.chat.complete(
+        model="mistral-small-latest",
+        messages=[{"role": "user", "content": data_context}]
     )
-    return response.text
+    return response.choices[0].message.content
 
 def chat(user_message, history=[]):
     context = f"{SYSTEM_PROMPT}\n\nUser: {user_message}"
-    response = client_ai.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=context
+    response = client_ai.chat.complete(
+        model="mistral-small-latest",
+        messages=[{"role": "user", "content": context}]
     )
-    return response.text
+    return response.choices[0].message.content
 
 if __name__ == "__main__":
     print("Morning First Mate - Fetching your data...\n")
